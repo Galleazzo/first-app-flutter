@@ -1,15 +1,28 @@
 import 'dart:developer';
-
+import './questao.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const PerguntaApp());
+void main(List<String> args) {
+  runApp(PerguntaApp());
 }
 
-class PerguntaApp extends StatelessWidget {
-  const PerguntaApp({super.key});
+class PerguntaApp extends StatefulWidget {
+  _PerguntaAppState createState() {
+    return _PerguntaAppState();
+  }
+}
 
-  
+
+class _PerguntaAppState extends State<PerguntaApp> {
+
+  var _perguntaSelecionada = 0;
+
+  void _responder() {
+    setState(() {
+      _perguntaSelecionada++;
+    });
+    print(_perguntaSelecionada);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,32 +42,32 @@ class PerguntaApp extends StatelessWidget {
       ),
       body: Column(
         children: <Widget>[
-          Text(perguntas[1]),
+          Questao(perguntas[_perguntaSelecionada]),
           ElevatedButton(
             child: Text("0 - 10"),
             onPressed: () {
-              log("ELE CLICOU!!!");
+              this._responder();
             },
           ),
 
           ElevatedButton(
             child: Text("10 - 20"),
             onPressed: () {
-              log("ELE CLICOU!!!");
+              this._responder();
             },
           ),
 
           ElevatedButton(
             child: Text("20 - 30"),
             onPressed: () {
-              log("ELE CLICOU!!!");
+              this._responder();
             },
           ),
 
           ElevatedButton(
             child: Text("30 - 40"),
             onPressed: () {
-              log("ELE CLICOU!!!");
+              this._responder();
             },
           ),
         ],
@@ -62,3 +75,4 @@ class PerguntaApp extends StatelessWidget {
     ));
   }
 }
+
