@@ -1,4 +1,6 @@
 import 'dart:developer';
+import 'package:projeto_perguntas/resposta.dart';
+
 import './questao.dart';
 import 'package:flutter/material.dart';
 
@@ -36,42 +38,19 @@ class _PerguntaAppState extends State<PerguntaApp> {
 
     return MaterialApp(
         home: Scaffold(
-      appBar: AppBar(
-        title: const Text("Perguntas"),
-        backgroundColor: Colors.blueAccent[100],
-      ),
-      body: Column(
-        children: <Widget>[
-          Questao(perguntas[_perguntaSelecionada]),
-          ElevatedButton(
-            child: Text("0 - 10"),
-            onPressed: () {
-              this._responder();
-            },
+          appBar: AppBar(
+            title: const Text("Perguntas"),
+            backgroundColor: Colors.blueAccent[100],
           ),
-
-          ElevatedButton(
-            child: Text("10 - 20"),
-            onPressed: () {
-              this._responder();
-            },
+          body: Column(
+            children: <Widget>[
+              Questao(perguntas[_perguntaSelecionada]),
+              Resposta("0 - 10", _responder),
+              Resposta("10 - 20", _responder),
+              Resposta("20 - 30", _responder),
+              Resposta("30 - 40", _responder)
+            ],
           ),
-
-          ElevatedButton(
-            child: Text("20 - 30"),
-            onPressed: () {
-              this._responder();
-            },
-          ),
-
-          ElevatedButton(
-            child: Text("30 - 40"),
-            onPressed: () {
-              this._responder();
-            },
-          ),
-        ],
-      ),
     ));
   }
 }
