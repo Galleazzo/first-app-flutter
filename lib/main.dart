@@ -21,20 +21,33 @@ class _PerguntaAppState extends State<PerguntaApp> {
 
   void _responder() {
     setState(() {
-      _perguntaSelecionada++;
+      if(_perguntaSelecionada < 1){
+        _perguntaSelecionada++;
+      } else {
+        _perguntaSelecionada = 0;
+      }
+      
     });
     print(_perguntaSelecionada);
   }
 
   @override
   Widget build(BuildContext context) {
-    const List<String> perguntas = [
-      "Qual é o seu nome?",
-      "Quantos anos voce tem?",
-      "Voce é homem ou mulher?",
-      "Voce tem cachorro?"
+    const List<Map<String, Object>> perguntas = [
+      {
+        'text': "Qual é o seu nome?",
+        'resposta': ['Paulo', 'Guto', 'Julia']
+      },
+      {
+        'text': "Quantos anos voce tem?",
+        'resposta': ["17", "18", "20"]
+      }
     ];
 
+    List<Widget> respostas = [];
+    for(String textoResp in perguntas[_perguntaSelecionada].cast()['resposta']) {
+      respostas.add(Resposta(textoResp, _responder));
+    }
 
     return MaterialApp(
         home: Scaffold(
@@ -44,11 +57,8 @@ class _PerguntaAppState extends State<PerguntaApp> {
           ),
           body: Column(
             children: <Widget>[
-              Questao(perguntas[_perguntaSelecionada]),
-              Resposta("0 - 10", _responder),
-              Resposta("10 - 20", _responder),
-              Resposta("20 - 30", _responder),
-              Resposta("30 - 40", _responder)
+              Questao(perguntas[_perguntaSelecionada]["text"].toString()),
+              ...respostas
             ],
           ),
     ));
