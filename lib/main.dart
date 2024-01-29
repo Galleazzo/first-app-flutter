@@ -17,31 +17,36 @@ class PerguntaApp extends StatefulWidget {
 }
 
 class _PerguntaAppState extends State<PerguntaApp> {
+  String nomeSelecionado = '';
+  int idadeSelecionada = 0;
+
   final _perguntas = [
     {
       'text': "Qual é o seu nome?",
       'resposta': [
-        {'texto' : 'Paulo', 'valor' : 'Paulo'},
-        {'texto' : 'Guto', 'valor': 'Guto'},
-        {'texto' : 'Julia', 'valor': 'Julia'},
+        {'texto': 'Paulo', 'valor': 'Paulo'},
+        {'texto': 'Guto', 'valor': 'Guto'},
+        {'texto': 'Julia', 'valor': 'Julia'},
       ]
     },
     {
       'text': "Quantos anos voce tem?",
       'resposta': [
-        {'texto' : "17", 'valor' : 17},
-        {'texto' : "18", 'valor': 18},
-        {'texto' : "20", 'valor': 20},
+        {'texto': "17", 'valor': 17},
+        {'texto': "18", 'valor': 18},
+        {'texto': "20", 'valor': 20},
       ]
     }
   ];
 
   var _perguntaSelecionada = 0;
 
-  void _responder( ) {
+  void _responder(int idade, String nome) {
     if (temPerguntaSelecionada) {
       setState(() {
         _perguntaSelecionada++;
+        this.nomeSelecionado = nome;
+        this.idadeSelecionada = idade;
       });
     }
   }
@@ -52,7 +57,6 @@ class _PerguntaAppState extends State<PerguntaApp> {
 
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
         home: Scaffold(
       appBar: AppBar(
